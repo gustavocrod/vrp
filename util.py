@@ -14,9 +14,7 @@ def showResult(routes, graph):
         for i in route:
             print(str(i) + " ", end="")
         print()
-
-    totalC = totalCost(routes, graph)
-    print("Custo total: " + str(totalC))
+    print("Custo total: " + str(totalCost(routes, graph)))
 
 def totalCost(routes, graph):
     cost = 0
