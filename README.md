@@ -17,7 +17,8 @@ O arquivo ```graph.py``` Contém a classe que representa o grafo em memória;
 O arquivo ```CEWS.py``` Contém o algoritmo de Clarke e Wright Savings -> CeWS
 O arquivo ```MCCEWS.py``` Contém o algoritmo de Monte Carlo aplicado ao algoritmo CeW Savings
 
-O arquivo ```NNA``` Contém uma básica implementação do algoritmo de Nearest Neighbor
+O arquivo ```NNA.py``` Contém uma básica implementação do algoritmo de Nearest Neighbor
+O arquivo ```util.py``` Contém funções uteis
 
 # Dev: 
 Gustavo "cr0d" Rodrigues
