@@ -14,8 +14,8 @@ from MCCEWS import *
 
 def VRP(graph):
     graph.calcDistances()
-    solution = MonteCarloSavings(graph)
-    #solution = ClarcAndWright(graph)
+    #solution = MonteCarloSavings(graph)
+    solution = ClarkeAndWright(graph)
     showResult(solution, graph)
 
 def read():

@@ -28,8 +28,9 @@ def computeSavingsList(graph):
     for i in range(1, graph.size+1):
         for j in range(1, graph.size+1):
             if i != j:
-                save = graph.distances[0, i] + graph.distances[0, j] - graph.distances[i, j] # sij = di0 + d0j − dij , for all i, j ≥ 1 and i != j;
+                save = graph.distances[i, 0] + graph.distances[0, j] - graph.distances[i, j] # sij = di0 + d0j − dij , for all i, j ≥ 1 and i != j;
                 list.append([(i, j), save])
+
     list.sort(key=lambda x: x[1], reverse=True)  # ordena a lista de saves, decrescente
     return list
 
@@ -63,9 +64,9 @@ def feasibleMerge(i, j, routes, graph):
     """
     r, s = [], []
     for route in routes:
-        if route[0] == i:
+        if route[0] == j:
             r = route
-        if route[len(route)-1] == j:
+        elif route[-1] == i:
             s = route
 
     if r and s:
@@ -85,12 +86,12 @@ def mergeRoutes(i, j, routes):
     :param routes:
     :return:
     """
-    r = []
-    s = []
+    r, s = [], []
+
     for route in routes:
-        if route[0] == i:
+        if route[0] == j:
             r = route
-        if route[len(route)-1] == j:
+        elif route[-1] == i:
             s = route
 
     routes.remove(r) # remove r
@@ -109,7 +110,7 @@ def insertWarehouse(routes):
 
 
 
-def ClarcAndWright(graph):
+def ClarkeAndWright(graph):
     """
     1 - routes <- create_initial_routes(V);
     2 - savings_list = compute_savings_list(V);
@@ -124,6 +125,7 @@ def ClarcAndWright(graph):
     solution = (createInitialRoutes(graph)).copy() # cria rotas com as cidades apenas
     listOfSaves = computeSavingsList(graph) # lista de economias
     for save in listOfSaves:
+        
         i, j = save[0]
         if (feasibleMerge(i, j, solution, graph)):
             mergeRoutes(i, j, solution)

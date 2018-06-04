@@ -54,7 +54,7 @@ class Graph:
         :return:
         """
 
-        for x in range(self.size+1): #percorre os n nos
+        for x in range(len(self.edges)): #percorre os n nos
             for edge in self.edges: # ve edge por edge
                 self.distances[(x, edge.name)] = distance(euclidean, self.edges[x], edge)
 

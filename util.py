@@ -37,6 +37,9 @@ def euclidean(node1, node2):
         sqrt( (xf - xi)^2 + (yf - yi)^2 )
 
     """
+    if node1 == node2:
+        return 0.0
+
     return math.sqrt(math.pow(node1.x - node2.x, 2) + math.pow(node1.y - node2.y, 2))
 
 def absolute(node1, node2):
