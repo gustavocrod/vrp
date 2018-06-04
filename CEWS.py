@@ -62,16 +62,16 @@ def feasibleMerge(i, j, routes, graph):
     :param graph: grafo
     :return:
     """
-    r, s = [], []
-    for route in routes:
-        if route[0] == j:
-            r = route
-        elif route[-1] == i:
-            s = route
+    r, s = [], [] # rota inicial e final
+    for route in routes: # percorre cada rota
+        if route[0] == j: # se a rota começar com j
+            r = route # rota inicial eh agora, a rota q iniciou com j
+        elif route[-1] == i: # se a rota termina com i
+            s = route # a rota final agora eh a rota q termina com i
 
-    if r and s:
-        if (cost(r, graph) + cost(s, graph) <= graph.vehiclesCapacity):
-            return True
+    if r and s: # se as rotas existem, ou seja, se existiu alguma rota q comecou com j e outra q terminou com i
+        if (cost(r, graph) + cost(s, graph) <= graph.vehiclesCapacity): # ele testa se o somatorio das demandas das duas rotas nao excede a capacidade maxima
+            return True # se nao exceder, entao SIM. as rotas podem ser unidas
 
     return False
 
@@ -87,7 +87,6 @@ def mergeRoutes(i, j, routes):
     :return:
     """
     r, s = [], []
-
     for route in routes:
         if route[0] == j:
             r = route
@@ -122,13 +121,12 @@ def ClarkeAndWright(graph):
     :param graph:
     :return:
     """
-    solution = (createInitialRoutes(graph)).copy() # cria rotas com as cidades apenas
-    listOfSaves = computeSavingsList(graph) # lista de economias
-    for save in listOfSaves:
-        
+    solution = (createInitialRoutes(graph)).copy() # cria rotas com as cidades apenas - passo 1
+    listOfSaves = computeSavingsList(graph) # lista de economias - passo 2
+    for save in listOfSaves: # passo 3
         i, j = save[0]
         if (feasibleMerge(i, j, solution, graph)):
-            mergeRoutes(i, j, solution)
+            mergeRoutes(i, j, solution) # passo 5
 
     insertWarehouse(solution)
     return solution
