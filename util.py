@@ -15,12 +15,12 @@ def cost(route, graph):
     return cost
 
 def showResult(routes, graph):
-    print("Result:")
+
     for route in routes:
         for i in route:
             print(str(i) + " ", end="")
         print()
-    print("Custo total: " + str(totalCost(routes, graph)))
+    #print("Custo total: " + str(totalCost(routes, graph)))
 
 def totalCost(routes, graph):
     """

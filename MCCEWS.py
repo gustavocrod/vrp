@@ -39,7 +39,6 @@ def computeMCSavingsList(graph, lbda):
     return list
 
 def MonteCarloSavings(graph):
-    print("Computing...")
     best = createInitialRoutes(graph)
     insertWarehouse(best)
     for i in range(2000):
