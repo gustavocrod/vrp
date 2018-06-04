@@ -42,7 +42,7 @@ def MonteCarloSavings(graph):
     print("Computing...")
     best = createInitialRoutes(graph)
     insertWarehouse(best)
-    for i in range(1000):
+    for i in range(2000):
         solution = createInitialRoutes(graph)
         savingList = computeMCSavingsList(graph, 0.05)
         for save in savingList:

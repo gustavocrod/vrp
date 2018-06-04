@@ -12,6 +12,19 @@ from util import *
 '''
 
 
+def createInitialRoutes(graph):
+    """
+    Cada cliente i vai pra uma nova rota r = (0, i, 0)
+    que vai do deposito ao cliente e retorna ao deposito
+
+    :param graph:
+    :return: retorn a lista com as n rotas
+    """
+    routes = []  # solucao
+    for i in range(1, graph.size+1):
+        routes.append([i] ) # nao adicionando o deposito para melhor manutencao do codigo
+    return routes
+
 def computeSavingsList(graph):
     """
     savings_list = {};
@@ -34,19 +47,6 @@ def computeSavingsList(graph):
     list.sort(key=lambda x: x[1], reverse=True)  # ordena a lista de saves, decrescente
     return list
 
-def createInitialRoutes(graph):
-    """
-    Cada cliente i vai pra uma nova rota r = (0, i, 0)
-    que vai do deposito ao cliente e retorna ao deposito
-
-    :param graph:
-    :return: retorn a lista com as n rotas
-    """
-    routes = []  # solucao
-    for i in range(1, graph.size+1):
-        list = [i] # nao adicionando o deposito para melhor manutencao do codigo
-        routes.append(list)
-    return routes
 
 def feasibleMerge(i, j, routes, graph):
     """
@@ -69,9 +69,9 @@ def feasibleMerge(i, j, routes, graph):
         elif route[-1] == i: # se a rota termina com i
             s = route # a rota final agora eh a rota q termina com i
 
-    if r and s: # se as rotas existem, ou seja, se existiu alguma rota q comecou com j e outra q terminou com i
-        if (cost(r, graph) + cost(s, graph) <= graph.vehiclesCapacity): # ele testa se o somatorio das demandas das duas rotas nao excede a capacidade maxima
-            return True # se nao exceder, entao SIM. as rotas podem ser unidas
+        if r and s: # se as rotas existem, ou seja, se existiu alguma rota q comecou com j e outra q terminou com i
+            if (cost(r, graph) + cost(s, graph) <= graph.vehiclesCapacity): # ele testa se o somatorio das demandas das duas rotas nao excede a capacidade maxima
+                return True # se nao exceder, entao SIM. as rotas podem ser unidas
 
     return False
 
@@ -97,17 +97,6 @@ def mergeRoutes(i, j, routes):
     routes.remove(s) # remove s
     routes.append(r + s)
 
-def insertWarehouse(routes):
-    """
-    adiciona o deposito nas rotas, inicio e fim
-    :param routes:
-    :return:
-    """
-    for route in routes:
-        route.insert(0, 0) # inicio
-        route.append(0) # fim
-
-
 
 def ClarkeAndWright(graph):
     """
@@ -127,6 +116,7 @@ def ClarkeAndWright(graph):
         i, j = save[0]
         if (feasibleMerge(i, j, solution, graph)):
             mergeRoutes(i, j, solution) # passo 5
+
 
     insertWarehouse(solution)
     return solution

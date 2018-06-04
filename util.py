@@ -1,6 +1,12 @@
 from graph import *
 
 def cost(route, graph):
+    """
+    Funcao que computa a soma das demandas dos clientes de uma rota
+    :param route: rota a ser computada
+    :param graph: grafo
+    :return:
+    """
     cost = 0
 
     for i in route:
@@ -17,17 +23,31 @@ def showResult(routes, graph):
     print("Custo total: " + str(totalCost(routes, graph)))
 
 def totalCost(routes, graph):
+    """
+    Funcao q computa o somatorio das distancias de todas as rotas
+    :param routes:
+    :param graph:
+    :return:
+    """
     cost = 0
     for route in routes:
         for i in range(1, len(route)):
-            #print(route[i-1], route[i])
-            cost += graph.distances[route[i-1], route[i]]
+            cost += graph.distances[route[i-1], route[i]] # e.g: cost += graph.distances[0, 1]
     return cost
 
+def insertWarehouse(routes):
+    """
+    adiciona o deposito nas rotas, inicio e fim
+    :param routes:
+    :return:
+    """
+    for route in routes:
+        route.insert(0, 0) # inicio
+        route.append(0) # fim
 
 def usage():
     print("Voce deve executar o programa redirecionando um arquivo para a entrada padrao.")
-    print("e.g  $ VRP < vrpnc1.txt")
+    print("e.g  $ python VRP < vrpnc1.txt")
 
 def distance(distFunction, node1, node2):
     return distFunction(node1, node2)
