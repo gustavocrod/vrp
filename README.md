@@ -8,7 +8,7 @@ para encontrar soluções eficientes para o VRP.
 para executar:
 
 ```
-$ python VRP.py < instances/vrnpc.<number>.txt
+$ python VRP.py <instances/vrnpc.<number>.txt
 ```
 # FILES:
 
